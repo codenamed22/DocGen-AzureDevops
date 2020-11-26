@@ -1,4 +1,25 @@
 # Python package
+- task: XplatGenerateReleaseNotes@3
+  inputs:
+    outputfile: '$(System.DefaultWorkingDirectory)\releasenotes.md'
+    templateLocation: 'InLine'
+    inlinetemplate: |
+      # RELEASENOTES
+      
+      **Release Name** :  ${releaseDetails.releaseDefinition.name}
+      **Release Number** : ${releaseDetails.name}
+      **Release Completed** : ${releaseDetails.modifiedOn}
+      **Compared Release Number** : ${compareReleaseDetails.name}
+      **Build Number** - $(Build.BuildNumber) 
+      **Build Id** - $(Build.DefinitionId) 
+      **Build Source Branch** - $(Build.SourceBranchName) 
+      **Build Type** - $(Build.Type)
+    dumpPayloadToConsole: false
+    dumpPayloadToFile: false
+    replaceFile: true
+    getParentsAndChildren: False
+    getAllParents: False
+    getIndirectPullRequests: False
 # Create and test a Python package on multiple Python versions.
 # Add steps that analyze code, save the dist with the build record, publish to a PyPI-compatible index, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/python
